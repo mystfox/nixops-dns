@@ -51,7 +51,7 @@ func domainHandler(domain string) func(dns.ResponseWriter, *dns.Msg) {
 			return
 		}
 
-		ip, err := nixopsHostIp(strings.TrimSuffix(q.Name, fmt.Sprintf("%s.", domain)))
+		ip, err := nixopsHostIp(strings.TrimSuffix(strings.ToLower(q.Name), fmt.Sprintf("%s.", domain)))
 		if err != nil {
 			log.Println(err)
 			handleNotFound(w, r)
